@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>Calculator-Logo</title>
+        <link rel="stylesheet" href="Calculator1.css">
+        <meta name="viewport" content="width=device-width,scale=1.0">
+    </head>
+    <body>
+        
+<div class="calc-body">
+
+    <div class="calc-screen">
+        <div id="calc-operation"></div>
+        <div id="calc-typed">0</div>
+    </div>  
+    <div class="calc-button-row">
+        <button class="ac" onclick="clearScreen()">AC</button>
+        <button class="opt" onclick="appendToScreen('&#8730;')">&#8730;</button>
+        <button class="opt" onclick="appendToScreen('%')">%</button>
+        <button class="opt" onclick="appendToScreen('/')">&#247;</button>
+        <button onclick="appendToScreen('7')">7</button>
+        <button onclick="appendToScreen('8')">8</button>
+        <button onclick="appendToScreen('9')">9</button>
+        <button class="opt" onclick="appendToScreen('*')">&#215;</button>
+        <button onclick="appendToScreen('4')">4</button>
+        <button onclick="appendToScreen('5')">5</button>
+        <button onclick="appendToScreen('6')">6</button>
+        <button class="opt" onclick="appendToScreen('-')">&#8722;</button>
+        <button onclick="appendToScreen('1')">1</button>
+        <button onclick="appendToScreen('2')">2</button>
+        <button onclick="appendToScreen('3')">3</button>
+        <button class="opt" onclick="appendToScreen('+')">&#43;</button>
+        <button onclick="appendToScreen('0')">0</button>
+        <button onclick="appendToScreen('.')">.</button>
+        <button class="cros" onclick="clearLastEntry()">&#9003;</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+    </div>
+
+    <script>
+        let operation = '';
+        let typed = document.getElementById('calc-typed');
+        let calcOperation = document.getElementById('calc-operation');
+    
+        function appendToScreen(value) {
+            if (value === '') {
+                operation += 'Math.sqrt(';
+                calcOperation.textContent = operation;
+            } else {
+                operation += value;
+            }
+            typed.textContent = operation;
+        }
+    
+        function clearScreen() {
+            operation = '';
+            typed.textContent = '0';
+            calcOperation.textContent = '';
+        }
+    
+        function clearLastEntry() {
+            operation = operation.slice(0, -1);
+            typed.textContent = operation;
+        }
+    
+        function calculate() {
+            try {
+                calcOperation.textContent = operation;
+                operation = eval(operation).toString();
+                typed.textContent = operation;
+            } catch (error) {
+                typed.textContent = 'Error';
+            }
+        }
+    </script>
+    </body>
+</html>
